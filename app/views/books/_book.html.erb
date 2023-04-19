@@ -1,0 +1,19 @@
+<%= form_with model: book, local:true do |f| %>
+<div class="row-md3">
+  <div class="form-title">
+    <%= f.label :Title %>
+    <br>
+    <%= f.text_field :title,class:"col-xs-12" %>
+  </div>
+
+  <div class="form-body">
+    <%= f.label :Opinion %>
+    <br>
+    <%= f.text_area :body,class:"col-xs-12" %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary col-xs-12" %>
+  </div>
+</div>
+<% end %>
