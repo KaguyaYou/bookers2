@@ -3,7 +3,7 @@ before_action :authenticate_user!
 #(ログインしていない状態で他のページに遷移しようとした場合、ログインページに繊維する)
 before_action :ensure_current_user, {only: [:edit,:update,:destroy]}
 #(ログインユーザー以外の情報を遷移しようとした時に制限をかける)
-
+before_action :is_matching_login_user,only:[:edit, :update]
 
 
   def new
@@ -26,11 +26,10 @@ before_action :ensure_current_user, {only: [:edit,:update,:destroy]}
   end
 
   def edit
-    user = User.find(params[:id])
-    unless user.id ==current_user.id
-      redirect_to "/users/#{current_user.id}"
-    end
-    @user=User.find(params)
+    @user=User.find(params[:id])
+      unless @user.id == current_user.id
+          redirect_to user_path(current_user.id)
+      end
   end
 
 
@@ -42,15 +41,14 @@ before_action :ensure_current_user, {only: [:edit,:update,:destroy]}
   end
 
   def update
-    
     @user = User.find(params[:id])
-    if  @user.update(user_params)
-      flash[:notice] = "You have updated user successfully."
-      redirect_to "/users/#{current_user.id}"
-    else
-      flash[:notice] = " errors prohibited this obj from being saved:"
-      render :edit
-    end
+      if  @user.update(user_params)
+        flash[:notice] = "You have updated user successfully."
+        redirect_to "/users/#{current_user.id}"
+      else
+        flash[:notice] = " errors prohibited this obj from being saved:"
+        render :edit
+      end
   end
 
 
@@ -69,7 +67,13 @@ before_action :ensure_current_user, {only: [:edit,:update,:destroy]}
         @user = User.find(params[:id])
      if @user.id != current_user.id
         redirect_to user_path(current_user.id)
-
      end
+    end
+
+    def is_matching_login_user
+      user = User.find(params[:id])
+      unless user.id == current_user.id
+        redirect_to user_path(current_user.id)
+      end
     end
 end

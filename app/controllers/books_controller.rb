@@ -3,23 +3,23 @@ class BooksController < ApplicationController
   def create
     @book=Book.new(book_params)
     @book.user_id=current_user.id
+    @books=Book.all
     if @book.save
       flash[:notice]="You have created book successfully."
       redirect_to book_path(@book)
     else
       @user = current_user
-      @book=Book.all
-      flash[:notice]="errors prohibited this obj from being saved:"
+      @book=Book.new
       render "index"
     end
   end
-    
+
   def show
     @user=current_user
     @book=Book.find(params[:id])
     @book_new =Book.new
   end
-    
+
   def index
     @user =current_user
     @books=Book.all
@@ -28,6 +28,9 @@ class BooksController < ApplicationController
 
   def edit
     @book =Book.find(params[:id])
+    unless @book.user.id == current_user.id
+      redirect_to books_path
+    end
   end
 
   def update

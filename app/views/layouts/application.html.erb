@@ -6,7 +6,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -23,52 +22,44 @@
       <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>
       <li  class="mt-1 mx-1">
-        <%= link_to user_path(current_user.id) do %>
-        <i class="fas fa-home text-light"></i>
-        <span class="text-light">Home</span>
+        <%= link_to user_path(current_user.id),class:"nav-link text-light" do %>
+        <i class="fas fa-home "></i>Home
         <% end %>
       </li>
       <li class="mt-1 mx-1">
-        <%= link_to users_path do %>
-          <i class="fas fa-link text-light"></i>
-          <span class="text-light">Users</span>
+        <%= link_to users_path,class:"nav-link text-light" do %>
+          <i class="fas fa-users"></i>Users
         <% end %>
       </li>
       <li class="mt-1 mx-1">
-        <%= link_to books_path do %>
-          <i class="fas fa-book-open text-light"></i>
-          <span class="text-light">Books</span>
+        <%= link_to books_path,class:"nav-link text-light" do %>
+          <i class="fas fa-book-open"></i>Books
         <% end %>
       </li>
       <li class="mt-1 mx-1">
-        <%= link_to destroy_user_session_path,method: :delete do %>
-        <i class="fas fa-sign-out-alt text-light"></i>
-        <span class="text-light">Log out</span>
+        <%= link_to destroy_user_session_path,method: :delete, class:"nav-link text-light" do %>
+        <i class="fas fa-sign-out-alt"></i>Log out
         <% end %>
       </li>
     <% else %>
       <li class="mt-1 mx-1">
-        <%= link_to root_path do %>
-        <i class="fas fa-home text-light"></i>
-        <span class="text-light">Home</span>
+        <%= link_to root_path,class:"nav-link text-light" do %>
+        <i class="fas fa-home"></i>Home
         <% end %>
       </li>
       <li class="mt-1 mx-1">
-        <%= link_to about_path do %>
-        <i class="fas fa-link text-light"></i>
-        <span class="text-light">About</span>
+        <%= link_to about_path,class:"nav-link text-light" do %>
+        <i class="fas fa-link"></i>About
         <% end %>
       </li>
       <li class="mt-1 mx-1">
-        <%= link_to new_user_registration_path do %>
-        <i class="fas fa-user-plus text-light"></i>
-        <span class="text-light">Sign up</span>
+        <%= link_to new_user_registration_path,class:"nav-link text-light" do %>
+        <i class="fas fa-user-plus"></i>Sign up
         <% end %>
       </li>
       <li class="mt-1 mx-1">
-        <%= link_to new_user_session_path do %>
-        <i class="fas fa-sign-in-alt text-light"></i>
-        <span class="text-light">Log in</span>
+        <%= link_to new_user_session_path,class:"nav-link text-light" do %>
+        <i class="fas fa-sign-in-alt"></i>Log in
         <% end %>
       </li>
 
@@ -80,12 +71,6 @@
   </header>
 <p id="notice"></p>
   <div class="body">
-
-  <% if flash[:notice] %>
-    <div class="flash">
-       <%= flash[:notice] %>
-    </div>
-  <% end %>
 
     <%= yield %>
 <footer>

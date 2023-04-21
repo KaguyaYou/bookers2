@@ -1,9 +1,9 @@
-<%= form_with model: user, local:true do |f| %>
+
 <table class="table table-user">
   <h2>User info</h2>
   <thead>
     <tr>
-      <%= image_tag @user.get_profile_image(100,100) %>
+      <%= image_tag user.get_profile_image(100,100) %>
     </tr>
   </thead>
   <tbody>
@@ -21,4 +21,3 @@
     </tr>
   </tbody>
 </table>
-<% end %>
